@@ -15,7 +15,7 @@ namespace Ecommerce.Domain.Entities.Subcategories
         public string Name { get; set; }
         public bool Status { get; set; }
         public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
         [JsonIgnore]
         public virtual Category Category { get; set; }
         public int CategoryId { get; set; }

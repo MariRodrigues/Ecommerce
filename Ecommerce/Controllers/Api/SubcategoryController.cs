@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Ecommerce.Application.Commands.Category;
 using Ecommerce.Application.Commands.Subcategories;
+using Ecommerce.Domain.Entities.Categories;
+using Ecommerce.Domain.Entities.Subcategories;
 using Ecommerce.Domain.Repositories;
+using Ecommerce.Infra.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +33,26 @@ namespace Ecommerce.Controllers.Api
         {
             var response = mediator.Send(request);
             return Ok(response);
+        }
+
+        [HttpGet]
+        [SwaggerOperation(Summary = "Buscar todas as subcategorias",
+                          OperationId = "Get")]
+        [ProducesResponseType(200)]
+        public IActionResult GetAllSubcategories()
+        {
+            var response = _subcategoryRepository.GetAll();
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Buscar subcategoria por Id",
+                          OperationId = "Get")]
+        [ProducesResponseType(200)]
+        public IActionResult GetCategoryById(int id)
+        {
+            var subcategoryViewModel = _mapper.Map<SubcategoryViewModel>(_subcategoryRepository.GetById(id));
+            return Ok(subcategoryViewModel);
         }
     }
 }

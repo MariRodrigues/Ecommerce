@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Ecommerce.Domain.Entities.Subcategories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Application.Profiles
 {
-    internal class SubcategoryProfile
+    public class SubcategoryProfile : Profile
     {
+        public SubcategoryProfile()
+        {
+            CreateMap<Subcategory, SubcategoryViewModel>();
+        }
     }
 }
