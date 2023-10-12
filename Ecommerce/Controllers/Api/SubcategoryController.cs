@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using Ecommerce.Application.Commands.Category;
 using Ecommerce.Application.Commands.Subcategories;
-using Ecommerce.Domain.Entities.Categories;
 using Ecommerce.Domain.Entities.Subcategories;
 using Ecommerce.Domain.Repositories;
-using Ecommerce.Infra.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

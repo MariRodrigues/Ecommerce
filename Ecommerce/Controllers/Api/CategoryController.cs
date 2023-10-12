@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Ecommerce.Application.Commands.Category;
 using Ecommerce.Domain.Entities.Categories;
+using Ecommerce.Domain.Queries;
 using Ecommerce.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Threading.Tasks;
 
 namespace Ecommerce.Controllers.Api
 {
@@ -14,12 +16,14 @@ namespace Ecommerce.Controllers.Api
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryQueries _categoriyQueries;
         private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
+        public CategoryController(ICategoryRepository categoryRepository, IMapper mapper, ICategoryQueries categoriyQueries)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+            _categoriyQueries = categoriyQueries;
         }
 
         [HttpPost]
@@ -36,9 +40,10 @@ namespace Ecommerce.Controllers.Api
         [SwaggerOperation(Summary = "Buscar todas as categorias",
                           OperationId = "Get")]
         [ProducesResponseType(200)]
-        public IActionResult GetAllCategories()
+        public async Task<IActionResult> GetAllCategories()
         {
-            var response = _categoryRepository.GetAll();
+            //var response = _categoryRepository.GetAll();
+            var response = await _categoriyQueries.GetCategoryWithSubcategories();
             return Ok(response);
         }
 

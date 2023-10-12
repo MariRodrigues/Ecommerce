@@ -10,9 +10,15 @@ services:
     ports:
       - "1444:1433"
 
+  mq:
+    image: rabbitmq:3-management
+    ports:
+       - 15672:15672
+
   ecommerceapi:
     image: ecommerce_madenn
     ports:
       - "5000:80"
     depends_on:
       - sqlserver
+      - mq

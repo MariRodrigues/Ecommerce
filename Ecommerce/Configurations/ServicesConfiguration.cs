@@ -1,7 +1,9 @@
 ﻿using Ecommerce.Domain;
+using Ecommerce.Domain.Queries;
 using Ecommerce.Domain.Repositories;
 using Ecommerce.Infra;
 using Ecommerce.Infra.Data;
+using Ecommerce.Infra.Queries;
 using Ecommerce.Infra.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,7 @@ namespace Ecommerce.Configurations
         {
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+            services.AddScoped<ICategoryQueries, CategoryQueries>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var assembly = AppDomain.CurrentDomain.Load("Ecommerce.Application");
