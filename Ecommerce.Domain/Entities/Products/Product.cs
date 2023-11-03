@@ -20,7 +20,9 @@ namespace Ecommerce.Domain.Entities.Products
         public double Width { get; set; }
         public double Weight { get; set; }
         public double Value { get; set; }
+        [JsonIgnore]
         public virtual List<ProductImages> Images { get; set; }
+        [JsonIgnore]
         public virtual List<ProductSubcategory> ProductSubcategories { get; set; }
     }
 }

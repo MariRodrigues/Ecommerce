@@ -13,5 +13,11 @@ namespace Ecommerce.Domain.Entities.Products
         public virtual Product Product { get; set; }
         public int SubcategoryId { get; set; }
         public virtual Subcategory Subcategory { get; set; }
+
+        public ProductSubcategory(int productId, int subcategoryId)
+        {
+            ProductId = productId;
+            SubcategoryId = subcategoryId;
+        }
     }
 }

@@ -1,9 +1,9 @@
 version: '3'
 services:
 
-  sqlserver:
+  db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sqlserver
+    container_name: db
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Pa55w0rd2019"
@@ -16,9 +16,10 @@ services:
        - 15672:15672
 
   ecommerceapi:
-    image: ecommerce_madenn
+    image: marisouzas2/ecommerce_madenn:latest
+    container_name: ecommerce_madenn
     ports:
       - "5000:80"
     depends_on:
-      - sqlserver
+      - db
       - mq
