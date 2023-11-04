@@ -10,5 +10,6 @@ namespace Ecommerce.Domain.Queries
     public interface ICategoryQueries
     {
         Task<IEnumerable<CategoryViewModel>> GetCategoryWithSubcategories();
+        Task<IEnumerable<CategoryViewModel>> GetCategoryWithProducts();
     }
 }

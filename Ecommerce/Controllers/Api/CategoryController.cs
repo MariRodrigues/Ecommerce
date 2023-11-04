@@ -37,12 +37,11 @@ namespace Ecommerce.Controllers.Api
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Buscar todas as categorias",
+        [SwaggerOperation(Summary = "Buscar todas as categorias com subcategorias",
                           OperationId = "Get")]
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetAllCategories()
         {
-            //var response = _categoryRepository.GetAll();
             var response = await _categoriyQueries.GetCategoryWithSubcategories();
             return Ok(response);
         }
@@ -55,6 +54,16 @@ namespace Ecommerce.Controllers.Api
         {
             var categoryViewModel = _mapper.Map<CategoryViewModel>(_categoryRepository.GetById(id));
             return Ok(categoryViewModel);
+        }
+
+        [HttpGet("/subcategories/products")]
+        [SwaggerOperation(Summary = "Buscar todas categorias com subcategorias e produtos",
+                          OperationId = "Get")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetCategoriesWithProducts()
+        {
+            var response = await _categoriyQueries.GetCategoryWithProducts();
+            return Ok(response);
         }
     }
 }
