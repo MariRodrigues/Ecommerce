@@ -63,18 +63,22 @@ namespace Ecommerce.Infra.Queries
                             ,p.Width as Subcategories_Products_Width
                             ,p.Weight as Subcategories_Products_Weight
                             ,p.Value as Subcategories_Products_Value
+							,p_images.Url as Subcategories_Products_Images_ImageUrl
+							,p_images.Id as Subcategories_Products_Images_ImageId
 
                           FROM [Categories] c
 
                           LEFT JOIN Subcategories s ON s.CategoryId = c.Id
 						  LEFT JOIN ProductSubcategories ps ON ps.SubcategoryId = s.Id
-						  LEFT JOIN Products p ON p.Id = ps.ProductId ";
+						  LEFT JOIN Products p ON p.Id = ps.ProductId 
+						  LEFT JOIN ProductImages p_images ON p_images.ProductId = p.Id";
 
             var result = await _connection.QueryAsync(query);
 
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(CategoryViewModel), "Id");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(SubcategoryViewModel), "SubcategoryId");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(ProductViewModel), "ProductId");
+            Slapper.AutoMapper.Configuration.AddIdentifier(typeof(ProductImagesViewModel), "ImageId");
 
             return Slapper.AutoMapper.MapDynamic<CategoryViewModel>(result);
         }

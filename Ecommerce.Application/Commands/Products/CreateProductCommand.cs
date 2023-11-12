@@ -17,7 +17,7 @@ namespace Ecommerce.Application.Commands.Products
         public double Weight { get; set; }
         public double Value { get; set; }
         public int SubcategoryId { get; set; }
-        public List<ProductImagesCommand> Images { get; set; } = null;
+        public List<string> Images { get; set; } = new List<string>();
     }
 
     public class ProductImagesCommand

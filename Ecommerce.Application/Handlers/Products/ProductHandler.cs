@@ -69,7 +69,7 @@ namespace Ecommerce.Application.Handlers.Products
             return new ResponseApi(true, "Produto cadastrado com sucesso. ");
         }
 
-        private async Task<List<ProductImages>> GenerateListImages(List<ProductImagesCommand> imagesList, int productId)
+        private async Task<List<ProductImages>> GenerateListImages(List<string> imagesList, int productId)
         {
             List<ProductImages> list = new();
 
@@ -77,7 +77,7 @@ namespace Ecommerce.Application.Handlers.Products
             {
                 var newImage = new ProductImages()
                 {
-                    Url = image.Url,
+                    Url = image,
                     ProductId = productId
                 };
                 list.Add(newImage);

@@ -38,5 +38,13 @@ namespace Ecommerce.Domain.Entities.Categories
         public double Width { get; set; }
         public double Weight { get; set; }
         public double Value { get; set; }
+        public List<ProductImagesViewModel> Images { get; set; }
+    }
+
+
+    public class ProductImagesViewModel
+    {
+        public int ImageId { get; set; }
+        public string ImageUrl  { get; set; }   
     }
 }
