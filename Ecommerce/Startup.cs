@@ -25,8 +25,9 @@ namespace Ecommerce
         {
             services
                 .AddServices(Configuration)
-                .AddCors()
-                .AddControllers();
+                .AddIdentityConfiguration()
+                .AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecommerce", Version = "v1" });
@@ -58,6 +59,8 @@ namespace Ecommerce
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecommerce v1"));
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

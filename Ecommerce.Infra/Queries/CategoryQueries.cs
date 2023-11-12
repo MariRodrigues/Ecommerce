@@ -18,7 +18,7 @@ namespace Ecommerce.Infra.Queries
             _connection = new SqlConnection(context.Database.GetConnectionString());
         }
 
-        public async Task<IEnumerable<CategoryViewModel>> GetCategoryWithSubcategories()
+        public async Task<IEnumerable<CategorySubcategoryViewModel>> GetCategoryWithSubcategories()
         {
             var query = @"SELECT 
                                    c.[Id]
@@ -34,13 +34,13 @@ namespace Ecommerce.Infra.Queries
 
             var result = await _connection.QueryAsync(query);
 
-            Slapper.AutoMapper.Configuration.AddIdentifier(typeof(CategoryViewModel), "Id");
+            Slapper.AutoMapper.Configuration.AddIdentifier(typeof(CategorySubcategoryViewModel), "Id");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(SubcategoryViewModel), "SubcategoryId");
 
-            return Slapper.AutoMapper.MapDynamic<CategoryViewModel>(result);
+            return Slapper.AutoMapper.MapDynamic<CategorySubcategoryViewModel>(result);
         }
 
-        public async Task<IEnumerable<CategoryViewModel>> GetCategoryWithProducts()
+        public async Task<IEnumerable<CategorySubcategoryViewModel>> GetCategoryWithProducts()
         {
             var query = @"SELECT 
                             c.[Id]
@@ -75,12 +75,12 @@ namespace Ecommerce.Infra.Queries
 
             var result = await _connection.QueryAsync(query);
 
-            Slapper.AutoMapper.Configuration.AddIdentifier(typeof(CategoryViewModel), "Id");
+            Slapper.AutoMapper.Configuration.AddIdentifier(typeof(CategorySubcategoryViewModel), "Id");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(SubcategoryViewModel), "SubcategoryId");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(ProductViewModel), "ProductId");
             Slapper.AutoMapper.Configuration.AddIdentifier(typeof(ProductImagesViewModel), "ImageId");
 
-            return Slapper.AutoMapper.MapDynamic<CategoryViewModel>(result);
+            return Slapper.AutoMapper.MapDynamic<CategorySubcategoryViewModel>(result);
         }
 
     }

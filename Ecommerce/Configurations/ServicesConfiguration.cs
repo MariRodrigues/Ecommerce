@@ -35,6 +35,11 @@ namespace Ecommerce.Configurations
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddDbContext<UserDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

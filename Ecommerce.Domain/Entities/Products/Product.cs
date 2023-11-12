@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Domain.Entities.Categories;
+using Ecommerce.Domain.Entities.ShoppingCart;
 using Ecommerce.Domain.Entities.Subcategories;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,7 @@ namespace Ecommerce.Domain.Entities.Products
         public virtual List<ProductImages> Images { get; set; }
         [JsonIgnore]
         public virtual List<ProductSubcategory> ProductSubcategories { get; set; }
+        [JsonIgnore]
+        public virtual List<CartItem> CartItems { get; set; }
     }
 }
