@@ -13,6 +13,8 @@ namespace Ecommerce.Domain.Entities.Users
         public int UserId { get; set; }
         public string CPF { get; set; }
         public Sexo Gender { get; set; }
+        public virtual Address Address { get; set; }
+        public int AddressId { get; set; }
     }
 
     public enum Sexo

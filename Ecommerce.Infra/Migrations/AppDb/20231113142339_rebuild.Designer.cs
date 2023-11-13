@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Ecommerce.Infra.Migrations
+namespace Ecommerce.Infra.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231112001143_migracao")]
-    partial class migracao
+    [Migration("20231113142339_rebuild")]
+    partial class rebuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -125,6 +125,43 @@ namespace Ecommerce.Infra.Migrations
                     b.ToTable("ProductSubcategories");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.Entities.ShoppingCart.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.ShoppingCart.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Entities.Subcategories.Subcategory", b =>
                 {
                     b.Property<int>("Id")
@@ -184,6 +221,21 @@ namespace Ecommerce.Infra.Migrations
                     b.Navigation("Subcategory");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.Entities.ShoppingCart.CartItem", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Entities.ShoppingCart.Cart", null)
+                        .WithMany("Items")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("Ecommerce.Domain.Entities.Products.Product", "Product")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Entities.Subcategories.Subcategory", b =>
                 {
                     b.HasOne("Ecommerce.Domain.Entities.Categories.Category", "Category")
@@ -202,9 +254,16 @@ namespace Ecommerce.Infra.Migrations
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Product", b =>
                 {
+                    b.Navigation("CartItems");
+
                     b.Navigation("Images");
 
                     b.Navigation("ProductSubcategories");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.ShoppingCart.Cart", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Subcategories.Subcategory", b =>

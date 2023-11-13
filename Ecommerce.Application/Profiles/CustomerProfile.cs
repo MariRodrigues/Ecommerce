@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Domain.Entities.Customers
+namespace Ecommerce.Application.Profiles
 {
-    internal class Customer
+    internal class CustomerProfile
     {
     }
 }

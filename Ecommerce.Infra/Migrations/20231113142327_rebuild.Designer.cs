@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Ecommerce.Infra.Migrations.UserDb
+namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20231112160343_create roles")]
-    partial class createroles
+    [Migration("20231113142327_rebuild")]
+    partial class rebuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,39 @@ namespace Ecommerce.Infra.Migrations.UserDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Users.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CEP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerInfoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Users.CustomUser", b =>
                 {
@@ -37,6 +70,9 @@ namespace Ecommerce.Infra.Migrations.UserDb
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerInfoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -100,6 +136,36 @@ namespace Ecommerce.Infra.Migrations.UserDb
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Users.CustomerInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("CustomerInfos");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -132,14 +198,14 @@ namespace Ecommerce.Infra.Migrations.UserDb
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "01897d51-beec-4870-8385-6dc95ec2a38f",
+                            ConcurrencyStamp = "ef8e8a21-9d49-42f5-bfcb-eba3d02aaece",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 88888,
-                            ConcurrencyStamp = "5735a638-2cd2-4742-b4ff-282afc4119f4",
+                            ConcurrencyStamp = "0bbee4bf-3927-4681-94ff-e14eebe44c29",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -246,6 +312,25 @@ namespace Ecommerce.Infra.Migrations.UserDb
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Users.CustomerInfo", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Entities.Users.Address", "Address")
+                        .WithOne("CustomerInfo")
+                        .HasForeignKey("Ecommerce.Domain.Entities.Users.CustomerInfo", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Domain.Entities.Users.CustomUser", "User")
+                        .WithOne("CustomerInfo")
+                        .HasForeignKey("Ecommerce.Domain.Entities.Users.CustomerInfo", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -295,6 +380,16 @@ namespace Ecommerce.Infra.Migrations.UserDb
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Users.Address", b =>
+                {
+                    b.Navigation("CustomerInfo");
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Users.CustomUser", b =>
+                {
+                    b.Navigation("CustomerInfo");
                 });
 #pragma warning restore 612, 618
         }

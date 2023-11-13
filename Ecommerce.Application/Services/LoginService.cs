@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Domain.Entities.Customers
+namespace Ecommerce.Application.Services
 {
-    public class Address
+    public class LoginService
     {
     }
 }

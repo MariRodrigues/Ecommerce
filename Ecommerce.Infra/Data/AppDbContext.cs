@@ -2,6 +2,7 @@
 using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Domain.Entities.ShoppingCart;
 using Ecommerce.Domain.Entities.Subcategories;
+using Ecommerce.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Infra.Data
@@ -40,6 +41,22 @@ namespace Ecommerce.Infra.Data
                 .HasOne(ps => ps.Product)
                 .WithMany(s => s.CartItems)
                 .HasForeignKey(ps => ps.ProductId);
+
+            //modelBuilder.Entity<Address>()
+            //    .HasKey(a => a.Id);
+
+            //modelBuilder.Entity<CustomerInfo>()
+            //    .HasKey(ci => ci.Id);
+
+            //modelBuilder.Entity<CustomerInfo>()
+            //    .HasOne(ci => ci.Address)
+            //    .WithOne(a => a.CustomerInfo)
+            //    .HasForeignKey<Address>(a => a.CustomerInfoId);
+
+            //modelBuilder.Entity<CustomerInfo>()
+            //    .HasOne(c => c.User)
+            //    .WithOne(u => u.CustomerInfo)
+            //    .HasForeignKey<CustomerInfo>(c => c.UserId);
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -49,5 +66,7 @@ namespace Ecommerce.Infra.Data
         public DbSet<ProductImages> ProductImages { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        //public DbSet<Address> Addresses { get; set; }
+        //public DbSet<CustomerInfo> CustomerInfos { get; set; }
     }
 }
