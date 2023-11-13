@@ -8,10 +8,10 @@ namespace Ecommerce.Infra
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AppDbContext _context;
+        private readonly UserDbContext _context;
         private IDbContextTransaction _transaction;
 
-        public UnitOfWork(AppDbContext context)
+        public UnitOfWork(UserDbContext context)
         {
             _context = context;
         }

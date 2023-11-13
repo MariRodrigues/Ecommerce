@@ -11,5 +11,19 @@ namespace Ecommerce.Domain.Entities.Users
         public DateTime UpdatedOn { get; set; }
         public virtual CustomerInfo CustomerInfo { get; set; }
         public int CustomerInfoId { get; set; }
+
+        public CustomUser(string name, string email, string username, string phoneNumber)
+        {
+            PhoneNumber = phoneNumber;
+            Name = name;
+            Email = email;
+            UserName = username;
+            Status = true;
+            CreatedOn = DateTime.Now;
+        }
+
+        public CustomUser()
+        {
+        }
     }
 }

@@ -15,6 +15,9 @@ namespace Ecommerce.Domain.Entities.Users
         public string City { get; set; }
         public string State { get; set; }
         public string CEP { get; set; }
+        public string Country { get; set; }
+        public string ReceiverName { get; set; }
+        public string Observation { get; set; } 
         public virtual CustomerInfo CustomerInfo { get; set; }
         public int? CustomerInfoId { get; set; }
     }

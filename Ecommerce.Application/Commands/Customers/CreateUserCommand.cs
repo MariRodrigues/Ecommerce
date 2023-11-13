@@ -37,6 +37,9 @@ namespace Ecommerce.Application.Commands.Customers
         public string City { get; set; }
         public string State { get; set; }
         public string CEP { get; set; }
+        public string Country { get; set; }
+        public string ReceiverName { get; set; }
+        public string Observation { get; set; }
 
     }
 }
