@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace Ecommerce.Application.Handlers.Customers
 {
     public interface ICustomerHandler :
-        IRequestHandler<CreateUserCommand, ResponseApi>
+        IRequestHandler<CreateUserCommand, ResponseApi>,
+        IRequestHandler<CreateCustomerInfoCommand, ResponseApi>
     {
     }
 }

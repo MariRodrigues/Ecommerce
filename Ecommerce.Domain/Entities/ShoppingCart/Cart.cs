@@ -6,5 +6,7 @@ namespace Ecommerce.Domain.Entities.ShoppingCart
     {
         public int Id { get; set; }
         public virtual List<CartItem> Items { get; set; }
+        public double? Frete { get; set; }
+        public double Subtotal { get; set; }
     }
 }

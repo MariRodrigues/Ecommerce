@@ -25,11 +25,15 @@ namespace Ecommerce.Application.Handlers.Customers
 
         public async Task<ResponseApi> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            CustomUser newUser = new(request.Name, request.Email, request.UserName, request.PhoneNumber);
-
             // Verifica se o e-mail já existe
-            if (await _userManager.FindByEmailAsync(newUser.UserName) is not null)
+            if (await _userManager.FindByEmailAsync(request.Email) is not null)
                 return new ResponseApi(false, "E-mail existente.");
+
+            // Verifica se o username já existe
+            if (await _userManager.FindByNameAsync(request.UserName) is not null)
+                return new ResponseApi(false, "Username existente.");
+
+            CustomUser newUser = new(request.Name, request.Email, request.UserName, request.PhoneNumber);
 
             using (var transaction = _uow.BeginTransaction())
             {
@@ -38,16 +42,33 @@ namespace Ecommerce.Application.Handlers.Customers
                     var identityUser = await _userManager.CreateAsync(newUser, request.Password);
 
                     if (!identityUser.Succeeded)
-                        return new ResponseApi(false, "Não foi possível cadastrar o usuário!");
+                        return new ResponseApi(false, "Não foi possível cadastrar o usuário: " + identityUser?.Errors);
 
                     // Adiciona a role ao usuário
                     var resultRole = await _userManager.AddToRoleAsync(newUser, "User");
 
                     if (!resultRole.Succeeded)
-                        return new ResponseApi(false, "Não foi possível adicionar a role ao usuário!");
+                        return new ResponseApi(false, "Não foi possível adicionar a role ao usuário.");
 
-                    // Acrescenta as informações adicionais do usuário
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.RollbackTransaction();
+                    return new ResponseApi(true, "Erro ao cadastrar usuário: " + ex.Message);
+                }
+            }
+            return new ResponseApi(true, "Usuário cadastrado com sucesso!");
+        }
 
+        public async Task<ResponseApi> Handle(CreateCustomerInfoCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+
+            using (var transaction = _uow.BeginTransaction())
+            {
+                try
+                {
                     Address address = new()
                     {
                         Street = request.Street,
@@ -55,31 +76,40 @@ namespace Ecommerce.Application.Handlers.Customers
                         Number = request.Number,
                         State = request.State,
                         Complement = request.Complement,
-                        CEP = request.CEP
+                        CEP = request.CEP,
+                        Country = request.Country,
+                        Observation = request.Observation,
+                        ReceiverName = request.ReceiverName
                     };
                     _userContext.Addresses.Add(address);
 
                     CustomerInfo customerInfo = new()
                     {
-                        UserId = newUser.Id,
+                        UserId = user.Id,
                         CPF = request.CPF,
                         Gender = request.Gender,
                         Address = address
                     };
                     _userContext.CustomerInfos.Add(customerInfo);
 
-                    _uow.Commit();
+                    transaction.Commit();
 
-                    newUser.CustomerInfoId = customerInfo.Id;
-                    await _userManager.UpdateAsync(newUser);
+                    // Atualiza ID na tabela
+                    address.CustomerInfoId = customerInfo.Id;
+
+                    _userContext.CustomerInfos.Update(customerInfo);
+                    _userContext.SaveChanges();
+
+                    user.CustomerInfoId = customerInfo.Id;
+                    await _userManager.UpdateAsync(user);
                 }
                 catch (Exception ex)
                 {
-                    _uow.RollbackTransaction();
-                    return new ResponseApi(true, "Não foi possível cadastrar as informações e endereço: " + ex.Message);
+                    transaction.RollbackTransaction();
+                    return new ResponseApi(true, "Erro ao cadastrar informações adicionais do usuário: " + ex.Message);
                 }
             }
-            return new ResponseApi(true, "Usuário cadastrado com sucesso!");
+            return new ResponseApi(true, "Informações cadastradas com sucesso!");
         }
     }
 }

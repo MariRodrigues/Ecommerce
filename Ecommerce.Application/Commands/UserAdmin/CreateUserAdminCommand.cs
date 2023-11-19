@@ -8,13 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Application.Commands.Customers
+namespace Ecommerce.Application.Commands.UserAdmin
 {
-    public class CreateUserCommand : IRequest<ResponseApi>
+    public class CreateUserAdminCommand : IRequest<ResponseApi>
     {
         [Required]
-        public string Name { get; set; }
-        [Required]
+        public string Name { get; set; }      
         public string PhoneNumber { get; set; }
         [Required]
         public string UserName { get; set; }

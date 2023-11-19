@@ -30,6 +30,7 @@ namespace Ecommerce
 
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecommerce", Version = "v1" });
             });
 
