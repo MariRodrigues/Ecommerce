@@ -13,10 +13,10 @@ namespace Ecommerce.Application.Handlers.Customers
     public class CustomerHandler : ICustomerHandler
     {
         private readonly UserManager<CustomUser> _userManager;
-        private readonly UserDbContext _userContext;
+        private readonly AppDbContext _userContext;
         private readonly IUnitOfWork _uow;
 
-        public CustomerHandler(UserManager<CustomUser> userManager, AppDbContext context, UserDbContext userContext, IUnitOfWork uow)
+        public CustomerHandler(UserManager<CustomUser> userManager, AppDbContext userContext, IUnitOfWork uow)
         {
             _userManager = userManager;
             _userContext = userContext;

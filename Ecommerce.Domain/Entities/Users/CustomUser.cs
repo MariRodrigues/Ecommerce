@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Ecommerce.Domain.Entities.Orders;
+using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 
 namespace Ecommerce.Domain.Entities.Users
 {
@@ -11,6 +13,7 @@ namespace Ecommerce.Domain.Entities.Users
         public DateTime UpdatedOn { get; set; }
         public virtual CustomerInfo CustomerInfo { get; set; }
         public int CustomerInfoId { get; set; }
+        public List<Order> Orders { get; set; }
 
         public CustomUser(string name, string email, string username, string phoneNumber)
         {

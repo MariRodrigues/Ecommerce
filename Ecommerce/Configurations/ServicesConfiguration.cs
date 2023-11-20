@@ -32,12 +32,6 @@ namespace Ecommerce.Configurations
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseLazyLoadingProxies();
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
-            services.AddDbContext<UserDbContext>(options =>
-            {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 

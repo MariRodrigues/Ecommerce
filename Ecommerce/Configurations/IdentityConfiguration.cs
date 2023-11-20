@@ -14,7 +14,7 @@ namespace Ecommerce.Configurations
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
         {
             services.AddIdentity<CustomUser, IdentityRole<int>>()
-                .AddEntityFrameworkStores<UserDbContext>()
+                .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(auth =>

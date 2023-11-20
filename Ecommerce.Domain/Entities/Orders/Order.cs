@@ -7,14 +7,15 @@ namespace Ecommerce.Domain.Entities.Orders
     public class Order
     {
         public int Id { get; set; }
-        public CustomUser UserId { get; set; }
+        public virtual CustomUser User { get; set; }
+        public int UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public string Status { get; set; }
         public double TotalAmount { get; set; }
         public string DeliveryAddress { get; set; }
         public string PaymentMethod { get; set; }
         public List<OrderItem> OrderItems { get; set; }
-        public decimal ShippingCost { get; set; }
+        public double ShippingCost { get; set; }
         public string TrackingNumber { get; set; }
         public List<StatusHistory> StatusHistory { get; set; }
         public string Carrier { get; set; }

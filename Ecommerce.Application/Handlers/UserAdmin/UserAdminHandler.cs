@@ -16,10 +16,10 @@ namespace Ecommerce.Application.Handlers.UserAdmin
     public class UserAdminHandler : IUserAdminHandler
     {
         private readonly UserManager<CustomUser> _userManager;
-        private readonly UserDbContext _userContext;
+        private readonly AppDbContext _userContext;
         private readonly IUnitOfWork _uow;
 
-        public UserAdminHandler(UserManager<CustomUser> userManager, UserDbContext userContext, IUnitOfWork uow)
+        public UserAdminHandler(UserManager<CustomUser> userManager, AppDbContext userContext, IUnitOfWork uow)
         {
             _userManager = userManager;
             _userContext = userContext;

@@ -29,6 +29,14 @@ namespace Ecommerce.Domain.Entities.Subcategories
             Status = true;
             CreatedOn = DateTime.Now;
         }
+
+        public Subcategory(string name, Category category)
+        {
+            Name = name;
+            Category = category;
+            Status = true;
+            CreatedOn = DateTime.Now;
+        }
     }
 }
 

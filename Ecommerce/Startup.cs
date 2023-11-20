@@ -71,6 +71,8 @@ namespace Ecommerce
             {
                 endpoints.MapControllers();
             });
+
+            app.Initialize();
         }
     }
 }

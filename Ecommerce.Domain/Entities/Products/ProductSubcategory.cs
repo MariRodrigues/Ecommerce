@@ -19,5 +19,11 @@ namespace Ecommerce.Domain.Entities.Products
             ProductId = productId;
             SubcategoryId = subcategoryId;
         }
+
+        public ProductSubcategory(Product product, Subcategory subcategory)
+        {
+            Product = product;
+            Subcategory = subcategory;
+        }
     }
 }

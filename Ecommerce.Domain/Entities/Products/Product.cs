@@ -1,6 +1,4 @@
-﻿using Ecommerce.Domain.Entities.Categories;
-using Ecommerce.Domain.Entities.ShoppingCart;
-using Ecommerce.Domain.Entities.Subcategories;
+﻿using Ecommerce.Domain.Entities.ShoppingCart;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
