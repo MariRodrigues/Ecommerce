@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Domain.Repositories;
 using Ecommerce.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Ecommerce.Infra.Repositories
 
         public IEnumerable<Product> GetAll()
         {
-            return _context.Products;
+            return _context.Products.Include(a => a.Images);
         }
 
         public Product GetById(int id)

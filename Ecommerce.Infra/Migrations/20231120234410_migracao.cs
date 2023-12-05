@@ -437,12 +437,12 @@ namespace Ecommerce.Infra.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 99999, "3986b145-9192-441b-9b9d-17139e4c0702", "admin", "ADMIN" });
+                values: new object[] { 99999, "75ee983d-f870-4d6d-88a8-0271b7a6abca", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 88888, "eaacff20-ccf3-401c-b3e1-65d88fe886d2", "user", "USER" });
+                values: new object[] { 88888, "82b36004-bb71-46c4-8cfd-a447e566cd23", "user", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

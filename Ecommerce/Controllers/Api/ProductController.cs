@@ -36,6 +36,7 @@ namespace Ecommerce.Controllers.Api
         [ProducesResponseType(201)]
         public IActionResult GetAllProducts()
         {
+
             return Ok(_productRepository.GetAll());
         }
     }

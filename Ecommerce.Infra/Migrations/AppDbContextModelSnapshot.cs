@@ -4,16 +4,14 @@ using Ecommerce.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231120151448_migracao")]
-    partial class migracao
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -481,14 +479,14 @@ namespace Ecommerce.Infra.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "3986b145-9192-441b-9b9d-17139e4c0702",
+                            ConcurrencyStamp = "75ee983d-f870-4d6d-88a8-0271b7a6abca",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 88888,
-                            ConcurrencyStamp = "eaacff20-ccf3-401c-b3e1-65d88fe886d2",
+                            ConcurrencyStamp = "82b36004-bb71-46c4-8cfd-a447e566cd23",
                             Name = "user",
                             NormalizedName = "USER"
                         });
