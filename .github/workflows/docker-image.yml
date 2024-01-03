@@ -24,5 +24,5 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t marisouzas2/ecommerce_madenn:${DOCKER_TAG} ./Ecommerce
+        docker build -t marisouzas2/ecommerce_madenn:${DOCKER_TAG} -f Ecommerce/Dockerfile .
         docker push marisouzas2/ecommerce_madenn:${DOCKER_TAG}
