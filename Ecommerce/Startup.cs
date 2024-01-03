@@ -94,7 +94,7 @@ namespace Ecommerce
                 endpoints.MapControllers();
             });
 
-            app.Initialize();
+            //app.Initialize();
         }
     }
 }
