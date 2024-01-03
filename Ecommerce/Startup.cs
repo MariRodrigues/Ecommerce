@@ -7,6 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog.Events;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
 
 namespace Ecommerce
 {
@@ -25,7 +29,6 @@ namespace Ecommerce
         {
             services
                 .AddServices(Configuration)
-                .AddIdentityConfiguration()
                 .AddCors();
 
             services.AddSwaggerGen(c =>
@@ -37,6 +40,25 @@ namespace Ecommerce
             services.AddLogging(loggingBuilder =>
             {
                 loggingBuilder.AddSerilog();
+            });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+            {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("0asdjas09djsa09djasdjsadajsd09asjd09sajcnzxn")),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
+                options.AddPolicy("User", policy => policy.RequireRole("user"));
             });
         }
 

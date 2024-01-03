@@ -58,7 +58,6 @@ namespace Ecommerce.Infra.Queries
                             ,p.CreatedOn as Subcategories_Products_CreatedOn
                             ,p.UpdatedOn as Subcategories_Products_UpdatedOn
                             ,p.Height as Subcategories_Products_Height
-                            ,p.Color as Subcategories_Products_Color
                             ,p.Size as Subcategories_Products_Size
                             ,p.Width as Subcategories_Products_Width
                             ,p.Weight as Subcategories_Products_Weight

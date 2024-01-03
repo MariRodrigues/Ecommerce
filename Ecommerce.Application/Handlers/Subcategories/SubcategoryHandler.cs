@@ -12,7 +12,7 @@ using Ecommerce.Domain.Entities.Subcategories;
 
 namespace Ecommerce.Application.Handlers.Subcategories
 {
-    internal class SubcategoryHandler : ISubcategoryHandler
+    public class SubcategoryHandler : ISubcategoryHandler
     {
         private readonly IUnitOfWork _uow;
         private readonly ISubcategoryRepository _subcategoryRepository;

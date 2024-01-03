@@ -33,7 +33,6 @@ namespace Ecommerce.Domain.Entities.Categories
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public double Height { get; set; }
-        public string Color { get; set; }
         public int Size { get; set; }
         public double Width { get; set; }
         public double Weight { get; set; }

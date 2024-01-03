@@ -25,7 +25,6 @@ namespace Ecommerce.Configurations
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductImagesRepository, ProductImagesRepository>();
             services.AddScoped<IProductSubcategoryRepository, ProductSubcategoryRepository>();
-            services.AddScoped<ICustomerQueries, CustomerQueries>();
 
             var assembly = AppDomain.CurrentDomain.Load("Ecommerce.Application");
             services.AddMediatR(assembly);

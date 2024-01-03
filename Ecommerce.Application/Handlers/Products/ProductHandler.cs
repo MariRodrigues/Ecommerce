@@ -34,7 +34,6 @@ namespace Ecommerce.Application.Handlers.Products
                 Size = request.Size,
                 Weight = request.Weight,
                 Description = request.Description,
-                Color = request.Color,
                 Value = request.Value,
                 Width = request.Width,
                 Status = true,

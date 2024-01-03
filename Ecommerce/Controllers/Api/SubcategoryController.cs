@@ -5,6 +5,7 @@ using Ecommerce.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Threading.Tasks;
 
 namespace Ecommerce.Controllers.Api
 {
@@ -25,9 +26,9 @@ namespace Ecommerce.Controllers.Api
         [SwaggerOperation(Summary = "Cadastra nova subcategoria",
                           OperationId = "Post")]
         [ProducesResponseType(201)]
-        public IActionResult CreateSubcategory([FromServices] IMediator mediator, [FromBody] CreateSubcategoryCommand request)
+        public async Task<IActionResult> CreateSubcategory([FromServices] IMediator mediator, [FromBody] CreateSubcategoryCommand request)
         {
-            var response = mediator.Send(request);
+            var response = await mediator.Send(request);
             return Ok(response);
         }
 
