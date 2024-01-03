@@ -7,11 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Ecommerce/Ecommerce.csproj", "Ecommerce/"]
+COPY ["Ecommerce.csproj", ""]
 COPY ["Ecommerce.Application/Ecommerce.Application.csproj", "Ecommerce.Application/"]
 COPY ["Ecommerce.Domain/Ecommerce.Domain.csproj", "Ecommerce.Domain/"]
 COPY ["Ecommerce.Infra/Ecommerce.Infra.csproj", "Ecommerce.Infra/"]
-RUN dotnet restore "Ecommerce/Ecommerce.csproj"
+RUN dotnet restore "Ecommerce.csproj"
 COPY . .
 WORKDIR "/src/Ecommerce"
 RUN dotnet build "Ecommerce.csproj" -c Release -o /app/build
