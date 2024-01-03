@@ -1,0 +1,25 @@
+name: Docker Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set Docker tag
+      run: echo "DOCKER_TAG=${{ github.sha }}" >> $GITHUB_ENV
+
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t marisouzas2/ecommerce_madenn:${DOCKER_TAG} ./path/to/your/dockerfile
+        docker push marisouzas2/ecommerce_madenn:${DOCKER_TAG}
