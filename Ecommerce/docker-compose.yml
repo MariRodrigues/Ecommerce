@@ -18,6 +18,14 @@ services:
     depends_on:
       - db
 
+  ecommerce_users:
+    image: marisouzas2/ecommerce_users:latest
+    container_name: ecommerce_users
+    ports:
+      - "9000:80"
+    depends_on:
+      - db
+
   ecommercebff:
     image: marisouzas2/ecommerce_bff:latest
     container_name: ecommerce_bff
@@ -25,3 +33,4 @@ services:
       - "8000:80"
     depends_on:
       - ecommerceapi
+      - ecommerce_users
