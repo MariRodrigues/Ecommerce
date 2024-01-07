@@ -3,6 +3,7 @@ using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Domain.Entities.Subcategories;
 using Ecommerce.Infra.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,13 @@ namespace Ecommerce.Configurations
             using (var serviceScope = app.ApplicationServices.CreateScope())
             using (var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>())
             {
+                // Verifica se o banco de dados existe
+                if (!context.Database.CanConnect())
+                {
+                    // Aplica as migrações se o banco não existir
+                    context.Database.Migrate();
+                }
+
                 // Verifica se a tabela categoria possui algum dado cadastrado
                 if (context.Categories.Any())
                 {
