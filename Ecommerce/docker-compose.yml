@@ -17,3 +17,11 @@ services:
       - "5000:80"
     depends_on:
       - db
+
+  ecommercebff:
+    image: marisouzas2/ecommerce_bff:latest
+    container_name: ecommerce_bff
+    ports:
+      - "8000:80"
+    depends_on:
+      - ecommerceapi
