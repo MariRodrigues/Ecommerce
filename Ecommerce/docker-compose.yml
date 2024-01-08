@@ -34,3 +34,6 @@ services:
     depends_on:
       - ecommerceapi
       - ecommerce_users
+    environment:
+      - "Urls:UserApi=http://ecommerce_users:80"
+      - "Urls:EcommerceApi=http://ecommerceapi:80"
