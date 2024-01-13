@@ -67,8 +67,8 @@ namespace Ecommerce.Configurations
                 List<Product> products = new() { 
                     new Product
                     {
-                        Name = "Camiseta Harry Potter",
-                        Description = "Camiseta estilizada com o emblema da casa de Hogwarts. Perfeita para os fãs do bruxinho mais famoso do mundo!",
+                        Name = "Urso Polar Esportista Coca-Cola",
+                        Description = "Urso POLAR Esportista da Coca-Cola - Oficial",
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
@@ -76,12 +76,12 @@ namespace Ecommerce.Configurations
                         Size = 2,
                         Width = 50.0,
                         Weight = 0.3,
-                        Value = 39.99
+                        Value = 49.99
                     },
                     new Product
                     {
-                        Name = "Chaveiro KillJoy",
-                        Description = "Chaveiro inspirado no agente KillJoy do Valorant. Um toque de estilo e tecnologia para suas chaves!",
+                        Name = "Urso Polar Esportista Coca-Cola - Karatê",
+                        Description = "Urso POLAR Esportista da Coca-Cola - Oficial",
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
@@ -89,12 +89,12 @@ namespace Ecommerce.Configurations
                         Size = 1,
                         Width = 5.0,
                         Weight = 0.05,
-                        Value = 9.99
+                        Value = 49.99
                     },
                     new Product
                     {
-                        Name = "Caneca Valorant Sova",
-                        Description = "Caneca personalizada com a arte do agente Sova do Valorant. Ideal para tomar sua bebida favorita enquanto joga!",
+                        Name = "Caderno Avatar 2 - 10 matérias",
+                        Description = "Caderno Avatar 2 - 10 matérias",
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
@@ -103,6 +103,32 @@ namespace Ecommerce.Configurations
                         Width = 8.0,
                         Weight = 0.4,
                         Value = 24.99
+                    },
+                    new Product
+                    {
+                        Name = "DVD Blue-ray - A fuga das Galinhas",
+                        Description = "DVD Blue-ray - A fuga das Galinhas",
+                        Status = true,
+                        CreatedOn = DateTime.Now,
+                        UpdatedOn = null,
+                        Height = 12.0,
+                        Size = 3,
+                        Width = 8.0,
+                        Weight = 0.4,
+                        Value = 14.99
+                    },
+                    new Product
+                    {
+                        Name = "Chaveiro Genshing Impact - Qiqi",
+                        Description = "Chaveiro Genshing Impact - Qiqi",
+                        Status = true,
+                        CreatedOn = DateTime.Now,
+                        UpdatedOn = null,
+                        Height = 12.0,
+                        Size = 3,
+                        Width = 8.0,
+                        Weight = 0.4,
+                        Value = 14.99
                     }
                 };
                 context.Products.AddRange(products);
@@ -112,18 +138,28 @@ namespace Ecommerce.Configurations
                 {
                     new ProductImages
                     {
-                        Url = "https://images.fatum.com.br/site/produtos/39_20969_03.jpg?losslevel=1&v=10.4",
+                        Url = "https://i.ibb.co/mzzKWdy/1.png",
                         Product = products[0]
                     },
                     new ProductImages
                     {
-                        Url = "https://images.fatum.com.br/site/produtos/39_20969_04.jpg?losslevel=1&v=10.4",
-                        Product = products[0]
-                    },
-                    new ProductImages
-                    {
-                        Url = "https://down-br.img.susercontent.com/file/br-11134207-7qukw-lhpayk4rt3ef83",
+                        Url = "https://i.ibb.co/crT6yJL/2.png",
                         Product = products[1]
+                    },
+                    new ProductImages
+                    {
+                        Url = "https://i.ibb.co/QPKrs14/3.png",
+                        Product = products[2]
+                    },
+                    new ProductImages
+                    {
+                        Url = "https://i.ibb.co/557MTwm/4.png",
+                        Product = products[3]
+                    },
+                    new ProductImages
+                    {
+                        Url = "https://i.ibb.co/CwdBLw1/5.png",
+                        Product = products[4]
                     }
                 };
                 context.ProductImages.AddRange(productsImages);
@@ -134,11 +170,6 @@ namespace Ecommerce.Configurations
                 context.ProductSubcategories.Add(new ProductSubcategory(products[1], subcategories[3]));
                 context.ProductSubcategories.Add(new ProductSubcategory(products[1], subcategories[5]));
                 context.ProductSubcategories.Add(new ProductSubcategory(products[2], subcategories[6]));
-
-                // Usuário comum
-
-
-                // Usuários admin
 
                 context.SaveChanges();
             }

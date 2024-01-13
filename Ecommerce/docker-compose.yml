@@ -37,3 +37,12 @@ services:
     environment:
       - "Urls:UserApi=http://ecommerce_users:80"
       - "Urls:EcommerceApi=http://ecommerceapi:80"
+   
+  ecommercefront:
+    image: dennerlucio/ecommerce_front:latest
+    container_name: ecommerce_front
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ecommercebff
+    
