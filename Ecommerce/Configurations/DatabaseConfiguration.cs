@@ -129,6 +129,32 @@ namespace Ecommerce.Configurations
                         Width = 8.0,
                         Weight = 0.4,
                         Value = 14.99
+                    },
+                    new Product
+                    {
+                        Name = "Caneca Valorant - Sova",
+                        Description = "Caneca Valorant - Sova",
+                        Status = true,
+                        CreatedOn = DateTime.Now,
+                        UpdatedOn = null,
+                        Height = 12.0,
+                        Size = 3,
+                        Width = 8.0,
+                        Weight = 0.4,
+                        Value = 14.99
+                    },
+                    new Product
+                    {
+                        Name = "Caneca Dev - Visual Studio",
+                        Description = "Caneca Dev - Visual Studio Cheat sheet",
+                        Status = true,
+                        CreatedOn = DateTime.Now,
+                        UpdatedOn = null,
+                        Height = 12.0,
+                        Size = 3,
+                        Width = 8.0,
+                        Weight = 0.4,
+                        Value = 14.99
                     }
                 };
                 context.Products.AddRange(products);
@@ -160,6 +186,16 @@ namespace Ecommerce.Configurations
                     {
                         Url = "https://i.ibb.co/CwdBLw1/5.png",
                         Product = products[4]
+                    },
+                    new ProductImages
+                    {
+                        Url = "https://i.ibb.co/9NFzmZ7/6.png",
+                        Product = products[5]
+                    },
+                    new ProductImages
+                    {
+                        Url = "https://i.ibb.co/XVfH14N/7.png",
+                        Product = products[6]
                     }
                 };
                 context.ProductImages.AddRange(productsImages);
