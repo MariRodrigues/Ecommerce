@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
 
-  ecommerce_users:
+  ec-users:
     image: marisouzas2/ecommerce_users:latest
     container_name: ecommerce_users
     ports:
@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
 
-  ecommercebff:
+  ec-bff:
     image: marisouzas2/ecommerce_bff:latest
     container_name: ecommerce_bff
     ports:
@@ -35,14 +35,14 @@ services:
       - ecommerceapi
       - ecommerce_users
     environment:
-      - "Urls:UserApi=http://ecommerce_users:80"
+      - "Urls:UserApi=http://ec-users:80"
       - "Urls:EcommerceApi=http://ecommerceapi:80"
    
-  ecommercefront:
+  ec-front:
     image: dennerlucio/ecommerce_front:latest
     container_name: ecommerce_front
     ports:
       - "8080:8080"
     depends_on:
-      - ecommercebff
+      - ec-bff
     
