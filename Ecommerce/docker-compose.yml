@@ -20,7 +20,7 @@ services:
 
   ec-users:
     image: marisouzas2/ecommerce_users:latest
-    container_name: ecommerce_users
+    container_name: ec-users
     ports:
       - "9000:80"
     depends_on:
@@ -28,19 +28,19 @@ services:
 
   ec-bff:
     image: marisouzas2/ecommerce_bff:latest
-    container_name: ecommerce_bff
+    container_name: ec-bff
     ports:
       - "8000:80"
     depends_on:
       - ecommerceapi
-      - ecommerce_users
+      - ec-users
     environment:
       - "Urls:UserApi=http://ec-users:80"
       - "Urls:EcommerceApi=http://ecommerceapi:80"
    
   ec-front:
     image: dennerlucio/ecommerce_front:latest
-    container_name: ecommerce_front
+    container_name: ec-front
     ports:
       - "8080:8080"
     depends_on:

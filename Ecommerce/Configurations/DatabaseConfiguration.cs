@@ -190,12 +190,12 @@ namespace Ecommerce.Configurations
                     new ProductImages
                     {
                         Url = "https://i.ibb.co/9NFzmZ7/6.png",
-                        Product = products[5]
+                        Product = products[6]
                     },
                     new ProductImages
                     {
                         Url = "https://i.ibb.co/XVfH14N/7.png",
-                        Product = products[6]
+                        Product = products[5]
                     }
                 };
                 context.ProductImages.AddRange(productsImages);
