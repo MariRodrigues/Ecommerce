@@ -11,7 +11,7 @@ namespace Ecommerce.Domain.Repositories
     public interface IProductRepository
     {
         Product Include(Product product);
-        IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAll(string? name);
         Product GetById(int id);
     }
 }

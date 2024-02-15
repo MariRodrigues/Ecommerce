@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Linq;
 
 namespace Ecommerce.Controllers.Api
 {
@@ -34,9 +35,10 @@ namespace Ecommerce.Controllers.Api
         [SwaggerOperation(Summary = "Busca todos os produtos",
                           OperationId = "Get")]
         [ProducesResponseType(201)]
-        public IActionResult GetAllProducts()
+        public IActionResult GetAllProducts(string? nome)
         {
-            var response = _productRepository.GetAll();
+            var response = _productRepository.GetAll(nome);
+
             return Ok(response);
         }
     }

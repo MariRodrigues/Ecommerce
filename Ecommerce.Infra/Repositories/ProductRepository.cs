@@ -31,9 +31,14 @@ namespace Ecommerce.Infra.Repositories
             }
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(string? name)
         {
-            return _context.Products.Include(a => a.Images);
+            if (name == null)
+            {
+                return _context.Products.Include(a => a.Images);
+            }
+
+            return _context.Products.Where(p => p.Name.Contains(name)).Include(a => a.Images);
         }
 
         public Product GetById(int id)
