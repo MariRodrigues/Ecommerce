@@ -4,14 +4,16 @@ using Ecommerce.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240217210042_incluindo tabela tamanhos")]
+    partial class incluindotabelatamanhos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +114,7 @@ namespace Ecommerce.Infra.Migrations
 
                     b.HasKey("ProductId", "Size");
 
-                    b.ToTable("ProductSizes");
+                    b.ToTable("ProductSize");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.ProductSubcategory", b =>

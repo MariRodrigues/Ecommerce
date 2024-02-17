@@ -14,6 +14,7 @@ namespace Ecommerce.Infra.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductSubcategory> ProductSubcategories { get; set; }
         public DbSet<ProductImages> ProductImages { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
@@ -46,6 +47,16 @@ namespace Ecommerce.Infra.Data
 
             modelBuilder.Entity<ProductSubcategory>()
                 .HasKey(ps => new { ps.ProductId, ps.SubcategoryId });
+
+            modelBuilder.Entity<ProductSize>()
+            .HasKey(ps => new { ps.ProductId, ps.Size });
+
+            modelBuilder.Entity<ProductSize>()
+                .Property(ps => ps.Size)
+                .HasConversion(
+                    sizeEnum => (int)sizeEnum,
+                    dbValue => (SizeEnum)dbValue
+                );
 
             base.OnModelCreating(modelBuilder);
         }

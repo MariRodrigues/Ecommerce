@@ -5,6 +5,7 @@ using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,31 +16,21 @@ namespace Ecommerce.Application.Handlers.Products
         private readonly IProductRepository _productRepository;
         private readonly IProductSubcategoryRepository _productSubcategoryRepository;
         private readonly IProductImagesRepository _productImagesRepository;
+        private readonly IProductSizesRepository _productSizesRepository;
         private readonly IUnitOfWork _uow;
 
-        public ProductHandler(IProductRepository productRepository, IUnitOfWork uow, IProductSubcategoryRepository productSubcategoryRepository, IProductImagesRepository productImagesRepository)
+        public ProductHandler(IProductRepository productRepository, IUnitOfWork uow, IProductSubcategoryRepository productSubcategoryRepository, IProductImagesRepository productImagesRepository, IProductSizesRepository productSizesRepository)
         {
             _productRepository = productRepository;
             _uow = uow;
             _productSubcategoryRepository = productSubcategoryRepository;
             _productImagesRepository = productImagesRepository;
+            _productSizesRepository = productSizesRepository;
         }
 
         public async Task<ResponseApi> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            Product newProduct = new()
-            {
-                Name = request.Name,
-                Height = request.Height,
-                Size = request.Size,
-                Weight = request.Weight,
-                Description = request.Description,
-                Value = request.Value,
-                Width = request.Width,
-                Status = true,
-                UpdatedOn = null,
-                CreatedOn = DateTime.Now
-            };
+            Product newProduct = new(request.Name, request.Description, request.Value, request.Quantity);
 
             using var scope = _uow.BeginTransaction();
            
@@ -50,6 +41,15 @@ namespace Ecommerce.Application.Handlers.Products
 
                 // Cadastra a relação de produto e subcategoria
                 _productSubcategoryRepository.Include(new ProductSubcategory(product.Id, request.SubcategoryId));
+
+                // Cadastra os tamanhos
+                if (request.Sizes.Count > 0)
+                {
+                    product.Quantity = request.Sizes.Sum(size => size.Quantity);
+
+                    var listSizes = await GenerateListSizes(request.Sizes, product.Id);
+                    _productSizesRepository.Include(listSizes);
+                }
 
                 // Cadastra imagens
                 if (request.Images!= null || request.Images?.Count > 0)
@@ -66,6 +66,24 @@ namespace Ecommerce.Application.Handlers.Products
 
             scope.Commit();
             return new ResponseApi(true, "Produto cadastrado com sucesso. ");
+        }
+
+        private async Task<List<ProductSize>> GenerateListSizes(List<ProductSizeCommand> sizes, int id)
+        {
+            List<ProductSize> sizesList = new();
+
+            foreach (var size in sizes)
+            {
+                var newSize = new ProductSize()
+                {
+                    ProductId = id,
+                    Quantity = size.Quantity,
+                    Size = size.Size
+                };
+                sizesList.Add(newSize);
+            }
+
+            return sizesList;
         }
 
         private async Task<List<ProductImages>> GenerateListImages(List<string> imagesList, int productId)

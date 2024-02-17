@@ -26,8 +26,8 @@ namespace Ecommerce.Configurations
                     {
                         Console.WriteLine("Trying to create and migrate database");
                         context.Database.Migrate();
-                    } 
-                    catch(SqlException exception) when (exception.Number == 1801)
+                    }
+                    catch (SqlException exception) when (exception.Number == 1801)
                     {
                         Console.WriteLine("Database already exists.");
                     }
@@ -64,7 +64,7 @@ namespace Ecommerce.Configurations
                 context.Subcategories.AddRange(subcategories);
 
                 // Produtos
-                List<Product> products = new() { 
+                List<Product> products = new() {
                     new Product
                     {
                         Name = "Urso Polar Esportista Coca-Cola",
@@ -72,10 +72,6 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 70.0,
-                        Size = 2,
-                        Width = 50.0,
-                        Weight = 0.3,
                         Value = 49.99
                     },
                     new Product
@@ -85,11 +81,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 10.0,
-                        Size = 1,
-                        Width = 5.0,
-                        Weight = 0.05,
-                        Value = 49.99
+                        Value = 49.99,
+                        Quantity = 23
                     },
                     new Product
                     {
@@ -98,11 +91,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 12.0,
-                        Size = 3,
-                        Width = 8.0,
-                        Weight = 0.4,
-                        Value = 24.99
+                        Value = 24.99,
+                        Quantity = 76
                     },
                     new Product
                     {
@@ -111,11 +101,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 12.0,
-                        Size = 3,
-                        Width = 8.0,
-                        Weight = 0.4,
-                        Value = 14.99
+                        Value = 14.99,
+                        Quantity = 340
                     },
                     new Product
                     {
@@ -124,11 +111,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 12.0,
-                        Size = 3,
-                        Width = 8.0,
-                        Weight = 0.4,
-                        Value = 14.99
+                        Value = 14.99,
+                        Quantity = 98
                     },
                     new Product
                     {
@@ -137,11 +121,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 12.0,
-                        Size = 3,
-                        Width = 8.0,
-                        Weight = 0.4,
-                        Value = 14.99
+                        Value = 14.99, 
+                        Quantity = 12
                     },
                     new Product
                     {
@@ -150,11 +131,8 @@ namespace Ecommerce.Configurations
                         Status = true,
                         CreatedOn = DateTime.Now,
                         UpdatedOn = null,
-                        Height = 12.0,
-                        Size = 3,
-                        Width = 8.0,
-                        Weight = 0.4,
-                        Value = 14.99
+                        Value = 14.99,
+                        Quantity = 20
                     }
                 };
                 context.Products.AddRange(products);
@@ -199,6 +177,29 @@ namespace Ecommerce.Configurations
                     }
                 };
                 context.ProductImages.AddRange(productsImages);
+
+                // Variações de tamanhos para os três primeiros produtos
+                List<ProductSize> productSizesVariations = new()
+                {
+                    // Product 1
+                    new ProductSize { Product = products[0], Size = SizeEnum.P, Quantity = 10 },
+                    new ProductSize { Product = products[0], Size = SizeEnum.M, Quantity = 15 },
+                    new ProductSize { Product = products[0], Size = SizeEnum.G, Quantity = 20 },
+                    new ProductSize { Product = products[0], Size = SizeEnum.PP, Quantity = 5 },
+
+                    // Product 2
+                    new ProductSize { Product = products[1], Size = SizeEnum.P, Quantity = 8 },
+                    new ProductSize { Product = products[1], Size = SizeEnum.M, Quantity = 12 },
+                    new ProductSize { Product = products[1], Size = SizeEnum.G, Quantity = 18 },
+                    new ProductSize { Product = products[1], Size = SizeEnum.PP, Quantity = 4 },
+
+                    // Product 3
+                    new ProductSize { Product = products[2], Size = SizeEnum.P, Quantity = 25 },
+                    new ProductSize { Product = products[2], Size = SizeEnum.M, Quantity = 30 },
+                    new ProductSize { Product = products[2], Size = SizeEnum.G, Quantity = 35 },
+                    new ProductSize { Product = products[2], Size = SizeEnum.PP, Quantity = 10 },
+                };
+                context.ProductSizes.AddRange(productSizesVariations);
 
                 // Relacionamento Subcategoria e produto
                 context.ProductSubcategories.Add(new ProductSubcategory(products[0], subcategories[0]));

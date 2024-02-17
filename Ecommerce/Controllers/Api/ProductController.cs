@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using Ecommerce.Application.Commands.Category;
-using Ecommerce.Application.Commands.Products;
+﻿using Ecommerce.Application.Commands.Products;
 using Ecommerce.Domain.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.JsonPatch.Operations;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Ecommerce.Controllers.Api
 {
@@ -25,9 +23,9 @@ namespace Ecommerce.Controllers.Api
         [SwaggerOperation(Summary = "Cadastra novo produto",
                           OperationId = "Post")]
         [ProducesResponseType(201)]
-        public IActionResult CreateProduct([FromServices] IMediator mediator, [FromBody] CreateProductCommand request)
+        public async Task<IActionResult> CreateProductAsync([FromServices] IMediator mediator, [FromBody] CreateProductCommand request)
         {
-            var response = mediator.Send(request);
+            var response = await mediator.Send(request);
             return Ok(response);
         }
 
