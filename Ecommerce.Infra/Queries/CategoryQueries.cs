@@ -57,10 +57,6 @@ namespace Ecommerce.Infra.Queries
                             ,p.Status as Subcategories_Products_Status
                             ,p.CreatedOn as Subcategories_Products_CreatedOn
                             ,p.UpdatedOn as Subcategories_Products_UpdatedOn
-                            ,p.Height as Subcategories_Products_Height
-                            ,p.Size as Subcategories_Products_Size
-                            ,p.Width as Subcategories_Products_Width
-                            ,p.Weight as Subcategories_Products_Weight
                             ,p.Value as Subcategories_Products_Value
 							,p_images.Url as Subcategories_Products_Images_ImageUrl
 							,p_images.Id as Subcategories_Products_Images_ImageId
