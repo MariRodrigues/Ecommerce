@@ -25,6 +25,8 @@ services:
       - "9000:80"
     depends_on:
       - db
+    environment:
+      - "ASPNETCORE_DOCKER=1"
 
   ec-bff:
     image: marisouzas2/ecommerce_bff:latest

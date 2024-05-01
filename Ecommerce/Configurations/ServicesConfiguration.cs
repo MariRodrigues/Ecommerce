@@ -6,17 +6,19 @@ using Ecommerce.Infra.Data;
 using Ecommerce.Infra.Queries;
 using Ecommerce.Infra.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace Ecommerce.Configurations
 {
     public static class ServicesConfiguration
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration Configuration)
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration Configuration, IWebHostEnvironment env)
         {
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
