@@ -12,6 +12,8 @@ namespace Ecommerce.Domain.Repositories
     {
         Product Include(Product product);
         IEnumerable<Product> GetAll(string? name);
+
+        IEnumerable<Product> GetAllByIds(List<int>? ids);
         Product GetById(int id);
     }
 }

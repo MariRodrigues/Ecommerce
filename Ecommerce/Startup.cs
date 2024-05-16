@@ -16,21 +16,19 @@ namespace Ecommerce
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            WebHostEnvironment = webHostEnvironment;
             LogConfiguration.Apply(Configuration);
         }
 
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment WebHostEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddServices(Configuration, WebHostEnvironment)
+                .AddServices(Configuration)
                 .AddCors();
 
             services.AddSwaggerGen(c =>

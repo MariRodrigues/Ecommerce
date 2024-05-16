@@ -18,7 +18,7 @@ namespace Ecommerce.Configurations
 {
     public static class ServicesConfiguration
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration Configuration, IWebHostEnvironment env)
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration Configuration)
         {
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();

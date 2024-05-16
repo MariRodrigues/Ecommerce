@@ -3,6 +3,7 @@ using Ecommerce.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +37,17 @@ namespace Ecommerce.Controllers.Api
         public IActionResult GetAllProducts(string? nome)
         {
             var response = _productRepository.GetAll(nome);
+
+            return Ok(response);
+        }
+
+        [HttpGet("list")]
+        [SwaggerOperation(Summary = "Busca produtos por id",
+                          OperationId = "Get")]
+        [ProducesResponseType(201)]
+        public IActionResult GetAllProducts([FromQuery] List<int> ids)
+        {
+            var response = _productRepository.GetAllByIds(ids);
 
             return Ok(response);
         }

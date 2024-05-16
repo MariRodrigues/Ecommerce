@@ -45,5 +45,10 @@ namespace Ecommerce.Infra.Repositories
         {
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
+
+        public IEnumerable<Product> GetAllByIds(List<int> ids)
+        {
+            return _context.Products.Where(p => ids.Contains(p.Id)).Include(a => a.Images).ToList();
+        }
     }
 }

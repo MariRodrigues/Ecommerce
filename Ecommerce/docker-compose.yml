@@ -17,6 +17,9 @@ services:
       - "5000:80"
     depends_on:
       - db
+    environment:
+      - "ASPNETCORE_DOCKER=1"
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=Ecommerce;User Id=sa;Password=Pa55w0rd2019;"
 
   ec-users:
     image: marisouzas2/ecommerce_users:latest
