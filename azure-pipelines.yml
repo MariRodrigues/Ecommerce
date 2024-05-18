@@ -40,7 +40,7 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'MariSouzaSubscription' # Substitua pelo nome da sua conexão de serviço
+    azureSubscription: 'ecommerce-madenn' # Substitua pelo nome da sua conexão de serviço
     appType: webApp
     appName: 'ecommerce-madenn-web-app' # Substitua pelo nome do seu app service
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
