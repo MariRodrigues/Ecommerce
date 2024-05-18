@@ -1,0 +1,48 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/*Tests.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    artifactName: 'package'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    publishLocation: 'Container'
+
+# Remover a tarefa DownloadBuildArtifacts, pois não é necessária.
+# O artefato já está disponível após a publicação.
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'MariSouzaSubscription' # Substitua pelo nome da sua conexão de serviço
+    appName: 'ecommerce-madenn-web-app' # Substitua pelo nome do seu app service
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
