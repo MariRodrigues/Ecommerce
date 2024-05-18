@@ -37,6 +37,7 @@ namespace Ecommerce
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseIISIntegration().UseIIS();
                     webBuilder.UseStartup<Startup>();
                 })
             .UseSerilog();
