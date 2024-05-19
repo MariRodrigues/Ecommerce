@@ -18,10 +18,7 @@ namespace Ecommerce
         {
             var webHost = CreateHostBuilder(args).Build();
             
-            ServicePointManager.ServerCertificateValidationCallback +=
-    (sender, cert, chain, sslPolicyErrors) => true;
-
-            Log.Information("Starting MyWebApp");
+            Log.Information("Starting MyWebApi");
 
             try
             {
