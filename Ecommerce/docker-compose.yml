@@ -19,7 +19,7 @@ services:
       - db
     environment:
       - "ASPNETCORE_DOCKER=1"
-      - "ConnectionStrings__DefaultConnection=Server=tcp:ec-madenn.database.windows.net,1433;Initial Catalog=ecommerce-database;Persist Security Info=False;User ID=marisouza;Password=Mari$ouza2;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Connection Timeout=30;MultiSubnetFailover=True;"
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=Ecommerce;User Id=sa;Password=Pa55w0rd2019;"
 
   ec-users:
     image: marisouzas2/ecommerce_users:latest
