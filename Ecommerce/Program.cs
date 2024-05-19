@@ -7,6 +7,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Ecommerce
@@ -16,6 +17,9 @@ namespace Ecommerce
         public static void Main(string[] args)
         {
             var webHost = CreateHostBuilder(args).Build();
+            
+            ServicePointManager.ServerCertificateValidationCallback +=
+    (sender, cert, chain, sslPolicyErrors) => true;
 
             Log.Information("Starting MyWebApp");
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,19 +18,21 @@ namespace Ecommerce.Configurations
         public static void Initialize(this IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
+
             using (var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>())
             {
+                Log.Information("Trying to check for pending migrations");
                 // Verifica se o banco de dados existe
                 if (context.Database.GetPendingMigrations().Any())
                 {
                     try
                     {
-                        Console.WriteLine("Trying to create and migrate database");
+                        Log.Information("Trying to create and migrate database");
                         context.Database.Migrate();
                     }
                     catch (SqlException exception) when (exception.Number == 1801)
                     {
-                        Console.WriteLine("Database already exists.");
+                        Log.Information("Database already exists.");
                     }
                 }
 
