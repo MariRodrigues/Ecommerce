@@ -34,13 +34,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    artifactName: 'package'
+    artifactName: '$(Build.Repository.Name)'
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     publishLocation: 'Container'
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'ecommerce-madenn' # Substitua pelo nome da sua conexão de serviço
-    appType: webApp
-    appName: 'ecommerce-madenn-web-app' # Substitua pelo nome do seu app service
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
