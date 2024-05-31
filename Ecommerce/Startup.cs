@@ -95,6 +95,8 @@ namespace Ecommerce
             });
 
             app.Initialize();
+
+            Log.Information("Iniciando");
         }
     }
 }

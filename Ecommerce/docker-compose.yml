@@ -10,17 +10,6 @@ services:
     ports:
       - "1433:1433"
 
-  ecommerceapi:
-    image: marisouzas2/ecommerce_madenn:latest
-    container_name: ecommerce_madenn
-    ports:
-      - "5000:80"
-    depends_on:
-      - db
-    environment:
-      - "ASPNETCORE_DOCKER=1"
-      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;trusted_connection=false;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
-
   ec-users:
     image: marisouzas2/ecommerce_users:latest
     container_name: ec-users
@@ -29,8 +18,19 @@ services:
     depends_on:
       - db
     environment:
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;trusted_connection=false;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
+
+  ecommerceapi:
+    image: marisouzas2/ecommerce_madenn:latest
+    container_name: ecommerce_madenn
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+      - ec-users
+    environment:
       - "ASPNETCORE_DOCKER=1"
-      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-users;trusted_connection=false;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
 
   ec-bff:
     image: marisouzas2/ecommerce_bff:latest
