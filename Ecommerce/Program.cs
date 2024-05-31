@@ -18,11 +18,12 @@ namespace Ecommerce
         {
             var webHost = CreateHostBuilder(args).Build();
             
-            Log.Information("Starting MyWebApi");
+            Log.Information("Starting MyWebApi - Ecommerce");
 
             try
             {
                 webHost.Run();
+                Log.Information("MyWebApi - Ecommerce Done");
             }
             catch (Exception ex)
             {

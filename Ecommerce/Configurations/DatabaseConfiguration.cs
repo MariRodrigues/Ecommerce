@@ -29,6 +29,7 @@ namespace Ecommerce.Configurations
                     {
                         Log.Information("Trying to create and migrate database");
                         context.Database.Migrate();
+                        Log.Information("Migration done");
                     }
                     catch (SqlException exception) when (exception.Number == 1801)
                     {
@@ -41,6 +42,8 @@ namespace Ecommerce.Configurations
                 {
                     return;
                 }
+
+                Log.Information("Populating database");
 
                 // Categorias
                 List<Category> categories = new()
@@ -212,6 +215,8 @@ namespace Ecommerce.Configurations
                 context.ProductSubcategories.Add(new ProductSubcategory(products[2], subcategories[6]));
 
                 context.SaveChanges();
+
+                Log.Information("End of database population");
             }
         }
     }
