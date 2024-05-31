@@ -19,7 +19,7 @@ services:
       - db
     environment:
       - "ASPNETCORE_DOCKER=1"
-      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;User Id=sa;Password=Pa55w0rd2019;"
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;trusted_connection=false;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
 
   ec-users:
     image: marisouzas2/ecommerce_users:latest
@@ -30,7 +30,7 @@ services:
       - db
     environment:
       - "ASPNETCORE_DOCKER=1"
-      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;User Id=sa;Password=Pa55w0rd2019;"
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=ecommerce-database;trusted_connection=false;User Id=sa;Password=Pa55w0rd2019;Persist Security Info=False;Encrypt=False"
 
   ec-bff:
     image: marisouzas2/ecommerce_bff:latest
